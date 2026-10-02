@@ -1,21 +1,5 @@
 # RPC-Based Shared Data Space System
 
-A broker/publisher/retriever system built on Linux RPC. The broker owns a shared in-memory data space, publishers add integer values to named topics, and retrievers read the values back.
-
-## Table of Contents
-
-1. [Requirements](#1-requirements)
-2. [Iowa State Server Requirements](#2-iowa-state-server-requirements)
-3. [Clone and Build](#3-clone-and-build)
-4. [Running the Broker](#4-running-the-broker)
-5. [Running the Publisher](#5-running-the-publisher)
-6. [Running the Retriever](#6-running-the-retriever)
-7. [Testing the Complete System Locally](#7-testing-the-complete-system-locally)
-8. [Running on an Iowa State Server](#8-running-on-an-iowa-state-server)
-9. [Implementation Assumptions](#9-implementation-assumptions)
-
----
-
 ## 1. Requirements
 
 The project is intended to run on Linux.
@@ -41,16 +25,16 @@ sudo apt install build-essential make rpcbind libtirpc-dev rpcgen
 
 ## 2. Iowa State Server Requirements
 
-This project is intended to be used on the Iowa State CS departmental servers.
 
-The Pyrite servers may not be accessible from an arbitrary Internet connection.
-
-> **You need to be connected to the Iowa State network, or to the appropriate Iowa State VPN, to access the departmental server environment.**
-
-For example, from an Iowa State-connected machine, the assignment may provide a server hostname such as:
+From an Iowa State-connected machine:
 
 ```text
 pyrite-n1.cs.iastate.edu
+```
+
+I personally had to do something like:
+```bash
+ssh jckmears@pyrite-n1.cs.iastate.edu
 ```
 
 ---
@@ -69,7 +53,7 @@ Enter the project:
 cd RPC_Based_Shared_Data_Space_System
 ```
 
-Start `rpcbind`:
+(only if local environment isn't functional, do NOT do this on iastate server) Start `rpcbind`:
 
 ```bash
 sudo systemctl start rpcbind
@@ -113,17 +97,13 @@ Start it with:
 ./bin/broker
 ```
 
-The broker should remain running while publishers and retrievers use it.
-
-The broker does not normally print a message for every successful request because the generated RPC server handles the network communication.
-
-Keep this terminal open.
+The broker should remain running while publishers and retrievers use it, such that this termainl is to be kept open.
 
 ---
 
 ## 5. Running the Publisher
 
-Syntax:
+From another terminal, syntax:
 
 ```text
 ./bin/publisher <hostname> <topic> <value>
@@ -132,10 +112,10 @@ Syntax:
 - The topic must not contain any numerical values. If it does, the program prints an error message and exits.
 - The value must contain only numerical values. If it contains non-numerical characters, the program prints an error message and exits.
 
-For example, using the local machine:
+For example, using the iastate server:
 
 ```bash
-./bin/publisher localhost test 55
+./bin/publisher pyrite-n1.cs.iastate.edu test 55
 ```
 
 This publishes:
@@ -147,7 +127,7 @@ test -> 55
 Run it again:
 
 ```bash
-./bin/publisher localhost test 100
+./bin/publisher pyrite-n1.cs.iastate.edu test 100
 ```
 
 The broker now contains:
@@ -171,7 +151,7 @@ The topic must not contain any numerical values. If it does, the program prints 
 For example:
 
 ```bash
-./bin/retriever localhost test
+./bin/retriever pyrite-n1.cs.iastate.edu test
 ```
 
 If the broker contains:
@@ -252,51 +232,13 @@ The topics maintain separate collections of values.
 
 ---
 
-## 8. Running on an Iowa State Server
 
-The same executables can be run on an Iowa State Pyrite server.
-
-For example:
-
-```text
-pyrite-n1.cs.iastate.edu
-```
-
-First connect to the server:
-
-```bash
-ssh jckmears@pyrite-n1.cs.iastate.edu
-```
-
-Once connected, clone the repository:
-
-```bash
-git clone https://github.com/jacksonmears/RPC_Based_Shared_Data_Space_System.git
-cd RPC_Based_Shared_Data_Space_System
-```
-
-The required development tools and libraries are already available on the Iowa State Pyrite servers, so additional package installation should generally not be necessary.
-
-Build the project:
-
-```bash
-make
-```
-
-Start the broker:
-
-```bash
-./bin/broker
-```
-
----
-
-## 9. Implementation Assumptions
+## 8. Implementation Assumptions
 
 - The broker is the RPC server and maintains the shared data in memory.
 - Publishers and retrievers are RPC clients and specify the broker hostname as a command-line argument.
 - A topic may contain up to 32 characters and must not contain numeric characters.
 - Each published value is an integer.
-- A topic may have any number of published values; values are stored dynamically rather than in a fixed-size array.
+- A topic may have any number of published values and values are stored dynamically rather than in a fixed-size array.
 - The broker must remain running while publishers and retrievers make requests.
 - The system uses TCP RPC for publisher and retriever communication.
