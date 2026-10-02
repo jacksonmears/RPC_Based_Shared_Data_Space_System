@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    std::cout << "Published " << value << " to topic " << topic << "\n";
+    std::cout << "Published " << value << " to topic => " << topic << "\n";
 
     clnt_destroy(client);
 
