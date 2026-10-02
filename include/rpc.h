@@ -34,7 +34,7 @@ struct RETRIEVE_RESULT {
 };
 typedef struct RETRIEVE_RESULT RETRIEVE_RESULT;
 
-#define BROKER_PROG 0x20000001
+#define BROKER_PROG 0x2000A37F
 #define BROKER_VERS 1
 
 #if defined(__STDC__) || defined(__cplusplus)

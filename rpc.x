@@ -24,5 +24,4 @@ program BROKER_PROG
         int PUBLISH(PUBLISH_ARGS) = 1; 
         RETRIEVE_RESULT RETRIEVE(RETRIEVER_ARGS) = 2; 
     } = 1; 
-} = 0x20000001;
-
+} = 0x2000A37F;

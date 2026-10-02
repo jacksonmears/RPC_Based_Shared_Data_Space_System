@@ -84,6 +84,7 @@ broker_prog_1(struct svc_req *rqstp, register SVCXPRT *transp)
         free(result);
     }
 
+
 	if (!svc_freeargs (transp, (xdrproc_t) _xdr_argument, (caddr_t) &argument)) {
 		fprintf (stderr, "%s", "unable to free arguments");
 		exit (1);
