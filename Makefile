@@ -9,6 +9,9 @@ BIN = bin
 BUILD = build
 SRC = src
 
+$(BIN) $(BUILD):
+	mkdir -p $@
+
 all: $(BIN)/broker $(BIN)/publisher $(BIN)/retriever
 
 $(BIN)/broker: $(SRC)/broker.cpp $(SRC)/rpc_svc.c $(SRC)/rpc_xdr.c
