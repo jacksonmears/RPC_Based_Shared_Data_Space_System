@@ -3,7 +3,7 @@
  * It was generated using rpcgen.
  */
 
-#include "rpc.h"
+#include "../include/rpc.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <rpc/pmap_clnt.h>
@@ -65,10 +65,25 @@ broker_prog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		svcerr_decode (transp);
 		return;
 	}
-	result = (*local)((char *)&argument, rqstp);
-	if (result != NULL && !svc_sendreply(transp, (xdrproc_t) _xdr_result, result)) {
-		svcerr_systemerr (transp);
-	}
+
+
+    // the one portion of this file I adjusted to address the allocated memory from the publisher and retriever files. 
+    result = (*local)((char *)&argument, rqstp);
+    if (result != NULL) 
+    {
+        if (!svc_sendreply(transp, (xdrproc_t)_xdr_result, result)) 
+        {
+            svcerr_systemerr(transp);
+        }
+
+        if (rqstp->rq_proc == RETRIEVE) 
+        {
+            xdr_free((xdrproc_t)xdr_RETRIEVE_RESULT, result);
+        }
+
+        free(result);
+    }
+
 	if (!svc_freeargs (transp, (xdrproc_t) _xdr_argument, (caddr_t) &argument)) {
 		fprintf (stderr, "%s", "unable to free arguments");
 		exit (1);

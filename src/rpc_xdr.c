@@ -3,7 +3,7 @@
  * It was generated using rpcgen.
  */
 
-#include "rpc.h"
+#include "../include/rpc.h"
 
 bool_t
 xdr_PUBLISH_ARGS (XDR *xdrs, PUBLISH_ARGS *objp)
@@ -12,7 +12,7 @@ xdr_PUBLISH_ARGS (XDR *xdrs, PUBLISH_ARGS *objp)
 
 	 if (!xdr_int (xdrs, &objp->value))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->topic, ~0))
+	 if (!xdr_string (xdrs, &objp->topic, 32))
 		 return FALSE;
 	return TRUE;
 }
@@ -22,7 +22,7 @@ xdr_RETRIEVER_ARGS (XDR *xdrs, RETRIEVER_ARGS *objp)
 {
 	register int32_t *buf;
 
-	 if (!xdr_string (xdrs, &objp->topic, ~0))
+	 if (!xdr_string (xdrs, &objp->topic, 32))
 		 return FALSE;
 	return TRUE;
 }

@@ -3,12 +3,12 @@ struct PUBLISH_ARGS
 {
     int value;
 
-    string topic<>;
+    string topic<32>;
 };
 
 struct RETRIEVER_ARGS 
 {
-    string topic<>;
+    string topic<32>;
 }; 
 
 struct RETRIEVE_RESULT

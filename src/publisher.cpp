@@ -1,12 +1,23 @@
-#include "../include/broker.hpp"
 #include "../include/publisher.hpp"
-
+#include "../include/arg_parser.hpp"
 
 int main(int argc, char* argv[])
 {
     if (argc != 4)
     {
-        std::cerr << "Usage: ./publisher hostname topic value\n";
+        std::cerr << "Usage error: ./publisher hostname topic value\n";
+        return 1;
+    }
+
+    if (number_found(argv[2]))
+    {
+        std::cerr << "Usage error: topic must not contain any integer values\n";
+        return 1;
+    }
+
+    if (char_found(argv[3]))
+    {
+        std::cerr << "Usage error: value must only contain integer values\n";
         return 1;
     }
 
@@ -32,6 +43,13 @@ int main(int argc, char* argv[])
     if (result == nullptr)
     {
         clnt_perror(client, "RPC call failed");
+        clnt_destroy(client);
+        return 1;
+    }
+
+    if (*result == 1)
+    {
+        std::cout << "must have integer for final argument" << "\n";
         clnt_destroy(client);
         return 1;
     }
