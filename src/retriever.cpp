@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    std::cout << "From " << topic << " retrieved: ";
+    std::cout << "From " << topic << " => retrieved: ";
     for (size_t i = 0; i < result->values.values_len; i++)
     {
         std::cout << result->values.values_val[i] << " ";
