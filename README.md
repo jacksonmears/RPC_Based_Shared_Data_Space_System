@@ -51,7 +51,7 @@ The Pyrite servers may not be accessible from an arbitrary Internet connection.
 For example, from an Iowa State-connected machine, the assignment may provide a server hostname such as:
 
 ```text
-pyrite01.cs.iastate.edu
+pyrite-n1.cs.iastate.edu
 ```
 
 ---
