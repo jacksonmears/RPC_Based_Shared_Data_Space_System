@@ -1,7 +1,7 @@
 # RPC-Based Shared Data Space System
 
 
-# 4. Requirements
+# 1. Requirements
 
 The project is intended to run on Linux.
 
@@ -24,7 +24,23 @@ sudo apt install build-essential make rpcbind libtirpc-dev rpcgen
 
 ---
 
-# 5. Iowa State Server Requirements
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 2. Iowa State Server Requirements
 
 This project is intended to be used on the Iowa State CS departmental servers.
 
@@ -40,7 +56,37 @@ pyrite01.cs.iastate.edu
 
 ---
 
-# 6. Clone the Repository
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 3. Clone the Repository
 
 Clone the repository:
 
@@ -89,6 +135,22 @@ make
 
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 4. Running the Broker
 
 The broker is the server that owns the shared data.
@@ -107,7 +169,32 @@ Keep this terminal open.
 
 ---
 
-# 12. Running the Publisher
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 5. Running the Publisher
 
 The publisher syntax is:
 
@@ -147,7 +234,30 @@ test -> [55, 100]
 
 ---
 
-# 13. Running the Retriever
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 6. Running the Retriever
 
 The retriever syntax is:
 
@@ -173,7 +283,31 @@ the retriever will return those values.
 
 ---
 
-# 14. Testing the Complete System Locally
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 7. Testing the Complete System Locally
 
 The simplest test is to use three terminals.
 
@@ -241,7 +375,37 @@ The topics maintain separate collections of values.
 
 ---
 
-# 16. Running on an Iowa State Server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 8. Running on an Iowa State Server
 
 The same executables can be run on an Iowa State Pyrite server.
 
